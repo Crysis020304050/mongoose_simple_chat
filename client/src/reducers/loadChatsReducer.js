@@ -4,6 +4,7 @@ const initialState = {
     chats: [],
     error: null,
     isFetching: false,
+    currentChat: null,
 };
 
 function loadChatsReducer( state = initialState, action ) {
@@ -42,6 +43,11 @@ function loadChatsReducer( state = initialState, action ) {
                 ...state,
                 error: action.error,
                 isFetching: false,
+            };
+        case ACTION_TYPES.SELECT_CHAT_ACTION:
+            return {
+                ...state,
+                currentChat: action.chatId,
             };
 
         default:

@@ -6,7 +6,7 @@ import createChatReducer from "./createChatReducer";
 
 export default combineReducers({
   auth: authReducer,
-  chat: chatReducer,
+/*  chat: chatReducer,*/
   chats: loadChatsReducer,
   /*createdChat: createChatReducer,*/
 });

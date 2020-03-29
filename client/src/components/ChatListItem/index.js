@@ -12,8 +12,6 @@ const ListItem = ( props ) => {
         name, id
     } = props;
 
-    console.log(currentChat);
-
     const handleClick = ( e ) => {
         if (currentChat !== id) {
             chatSelector( id )
@@ -38,6 +36,6 @@ const mapDispatchToProps = ( dispatch ) => ( {
     }
 } );
 
-const mapStateToProps = state => state.chat;
+const mapStateToProps = state => state.chats;
 
 export default connect( mapStateToProps, mapDispatchToProps )( ListItem );
