@@ -4,9 +4,11 @@
   border: 1px solid grey;
   background-color: white;
   align-self: flex-start;
+  display: flex;
+  flex-direction: column;
 
   ul {
-
+    flex-grow: 1;
     li {
       background-color: #00C4A2;
     }

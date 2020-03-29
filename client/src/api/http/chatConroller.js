@@ -14,3 +14,16 @@ export const getChatMessages = ( { chatId } ) =>
             'Content-type': 'application/json',
         }
     } );
+
+export const createChat = async (data) => {
+    try {
+        return await http.post('/chat', data, {
+            headers: {
+                'Content-type': 'application/json',
+            }
+        })
+    } catch (e) {
+        throw e;
+    }
+
+};

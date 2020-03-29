@@ -49,3 +49,18 @@ export const createLoadChatMessagesErrorAction = ( error ) => ( {
   type: ACTION_TYPES.LOAD_CHAT_MESSAGES_ERROR,
   error
 } );
+
+export const createChatCreatingRequestAction = (values) => ( {
+  type: ACTION_TYPES.CREATE_CHAT_REQUEST,
+  values,
+} );
+
+export const createChatCreatingSuccessAction = (chat) => ( {
+  type: ACTION_TYPES.CREATE_CHAT_SUCCESS,
+  chat,
+} );
+
+export const createChatCreatingErrorAction = (error) => ( {
+  type: ACTION_TYPES.CREATE_CHAT_ERROR,
+  error,
+} );

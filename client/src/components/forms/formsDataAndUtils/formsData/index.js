@@ -2,7 +2,7 @@ import Input from "../../Input";
 import PasswordInput from "../../PasswordInput";
 import FileInput from "../../FileInput";
 
-export const fieldValues = [
+export const fieldValuesForAuth = [
     {
         component: Input,
         fieldOptions: {
@@ -44,4 +44,16 @@ export const fieldValues = [
             accept:'image/*'
         },
     }
+];
+
+export const fieldValuesForChatCreating =[
+    {
+        component: Input,
+        fieldOptions: {
+            name: 'chatName',
+        },
+        inputProps: {
+            placeholder: 'Chat Name',
+        },
+    },
 ];

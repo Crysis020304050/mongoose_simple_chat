@@ -2,6 +2,7 @@ import React       from 'react';
 import styles      from './ChatList.module.scss'
 import ListItem    from "../ChatListItem";
 import { connect } from "react-redux";
+import CreateChatForm from "../forms/CreateChatForm";
 
 const ChatList = ( props ) => {
 
@@ -21,6 +22,7 @@ const ChatList = ( props ) => {
                         /> ) )
                 }
             </ul>
+            <CreateChatForm/>
         </div>
     );
 };

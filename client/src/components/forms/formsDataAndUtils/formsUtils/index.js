@@ -15,8 +15,8 @@ export const withField = (WrappedComponent, key) => (fieldOptions) => {
 };
 
 export const renderFields = (fieldsValues) => {
-    return fieldsValues.map((fieldValues, key) => {
-        const {component, fieldOptions, inputProps} = fieldValues;
+    return fieldsValues.map((fieldValuesForAuth, key) => {
+        const {component, fieldOptions, inputProps} = fieldValuesForAuth;
         return withField(component, key)(fieldOptions)(inputProps);
     })
 };

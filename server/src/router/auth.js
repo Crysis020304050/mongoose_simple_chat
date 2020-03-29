@@ -23,6 +23,7 @@ authRouter.post('/sign_up_with_picture',
 );
 
 authRouter.post('/login',
+    createValidationMW(LOGIN_USER_SCHEMA),
     UserController.findUserByLogin,
     UserController.compareUserPassword,
     (req, res) => res.send(req.user),

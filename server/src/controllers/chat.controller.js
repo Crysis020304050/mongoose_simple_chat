@@ -10,7 +10,7 @@ class ChatController {
     createChat = async (req, res, next) => {
         try {
             const {headers: {authorization: userId}, body} = req;
-            res.send(await this._controller.create({...body, owner: userId, users: userId}));
+            res.send(await this._controller.create({name: body.chatName, owner: userId, users: userId}));
         } catch (e) {
             next(e);
         }

@@ -3,7 +3,7 @@ import {Form, withFormik} from 'formik';
 import {signUpSchema} from "../validationSchema";
 import styles from './SignUpForm.module.scss';
 import { NavLink } from 'react-router-dom';
-import {fieldValues} from '../formsDataAndUtils/formsData'
+import {fieldValuesForAuth} from '../formsDataAndUtils/formsData'
 import {renderFields} from '../formsDataAndUtils/formsUtils'
 import store from '../../../store';
 import {createAuthRequestAction} from '../../../actions';
@@ -25,7 +25,7 @@ function SignUpForm(props) {
                 <h4>Please fill in this form to create an account</h4>
                 <Form className={styles.container}>
                     {
-                        renderFields(fieldValues)
+                        renderFields(fieldValuesForAuth)
                     }
 
                     <div className={styles.confirmButton} onClick={props.submitForm}>Sign Up</div>

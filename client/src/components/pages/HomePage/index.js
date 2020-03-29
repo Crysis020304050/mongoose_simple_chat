@@ -7,8 +7,8 @@ import styles from './HomePage.module.scss';
 import {createLoadChatsRequestAction} from '../../../actions';
 
 function HomePage(props) {
-
-    const {loadChatList, chats} = props;
+    
+    const {chats, loadChatList} = props;
 
     useEffect(() => {
         loadChatList();
@@ -17,7 +17,6 @@ function HomePage(props) {
     return (
         <div className={styles.container}>
             <ChatList chatList={chats}/>
-
         </div>
     );
 }

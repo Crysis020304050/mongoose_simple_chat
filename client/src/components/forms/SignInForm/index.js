@@ -5,12 +5,12 @@ import styles from '../SignUpForm/SignUpForm.module.scss';
 import newStyles from './SignInForm.module.scss';
 import classNames from 'classnames';
 import { NavLink } from 'react-router-dom';
-import {fieldValues} from '../formsDataAndUtils/formsData'
+import {fieldValuesForAuth} from '../formsDataAndUtils/formsData'
 import {renderFields} from '../formsDataAndUtils/formsUtils'
 import store from "../../../store";
 import {createAuthRequestAction} from '../../../actions';
 
-const signInFieldsValues = [fieldValues[0], fieldValues[1]];
+const signInFieldsValues = [fieldValuesForAuth[0], fieldValuesForAuth[1]];
 
 const handleSubmit = values => {
     store.dispatch(createAuthRequestAction(values));

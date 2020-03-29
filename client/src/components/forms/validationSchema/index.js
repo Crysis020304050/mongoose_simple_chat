@@ -36,3 +36,10 @@ export const signInSchema = yup.object().shape({
                                                    login: yup.string().required().label('Login'),
                                                    password: yup.string().required().label('Password'),
                                                });
+
+const CHAT_NAME_PATTERN = /^\w{6,16}$/;
+const chatNamePatternMessage = 'Login should be 6 to 16 characters long, can contains letters, numbers or "- _" characters';
+
+export const createChatSchema = yup.object().shape({
+   chatName: yup.string().required().matches(CHAT_NAME_PATTERN, chatNamePatternMessage).label('Chat name'),
+});

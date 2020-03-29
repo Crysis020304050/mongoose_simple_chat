@@ -2,7 +2,7 @@ import axios from 'axios';
 import {ID_KEY} from "../../constants";
 
 const http = axios.create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: 'http://109.87.205.141:3000/api',
 });
 
 http.interceptors.request.use( config => {
