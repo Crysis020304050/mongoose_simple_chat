@@ -1,0 +1,30 @@
+.container{
+  min-height: inherit;
+  min-width: 200px;
+  border: 1px solid grey;
+  background-color: white;
+  align-self: flex-start;
+
+  ul {
+
+    li {
+      background-color: #00C4A2;
+    }
+    & > :nth-child(odd) {
+      background-color: lightblue;
+    }
+  }
+
+}
+
+.itemContainer{
+  cursor: pointer;
+  min-height: 30px;
+  padding: 10px;
+  min-width: 80px;
+}
+
+
+.selectedChat {
+  border: 1px solid red;
+}

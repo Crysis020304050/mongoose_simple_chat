@@ -1,17 +1,33 @@
-import React, { Component } from 'react';
-import { withRouter }       from 'react-router';
+import React, {useEffect} from 'react';
+import {withRouter} from 'react-router';
 import './HomePage.module.scss'
+import {connect} from "react-redux";
+import ChatList from "../../ChatList";
+import styles from './HomePage.module.scss';
+import {createLoadChatsRequestAction} from '../../../actions';
 
-class HomePage extends Component {
+function HomePage(props) {
 
-    render () {
-        return (
-            <>
-                <h1>Home Page!</h1>
+    const {loadChatList, chats} = props;
 
-            </>
-        );
-    }
+    useEffect(() => {
+        loadChatList();
+    }, []);
+
+    return (
+        <div className={styles.container}>
+            <ChatList chatList={chats}/>
+
+        </div>
+    );
 }
 
-export default withRouter( HomePage );
+const mapStateToProps = state => state.chats;
+
+const mapDispatchToProps = dispatch => ({
+    loadChatList: () => {
+        dispatch(createLoadChatsRequestAction())
+    },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(HomePage));

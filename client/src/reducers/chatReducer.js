@@ -2,11 +2,10 @@ import ACTION_TYPES from '../actions/actionTypes.js';
 import _ from 'lodash';
 
 const initialState = {
-  chats: {},
   currentChat: null,
 };
 
-function chatsReducer (state = initialState, action) {
+function chatReducer (state = initialState, action) {
 
   switch (action.type) {
 
@@ -15,11 +14,6 @@ function chatsReducer (state = initialState, action) {
         ...state,
         currentChat: action.chatId,
       };
-    case ACTION_TYPES.LOAD_CHAT_MESSAGES_SUCCESS:
-      const { chatId, messages } = action;
-      const newState = _.clone(state);
-      newState.chats[ chatId ].messages = messages;
-      return newState;
 
     default:
       return state;
@@ -27,4 +21,4 @@ function chatsReducer (state = initialState, action) {
 
 }
 
-export default chatsReducer;
+export default chatReducer;

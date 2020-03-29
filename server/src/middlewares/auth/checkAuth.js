@@ -1,13 +1,18 @@
 const {AuthorizationError} = require('../../utils/errors');
+const {User} = require('../../models');
 
 async function checkAuth(req, res, next) {
     try {
-        if (req.headers.authorization) {
-            return next();
+        const {headers: {authorization: id}} = req;
+        if (id) {
+            const user = await User.findById(id);
+            if (user) {
+                return next();
+            }
         }
         next(new AuthorizationError());
     } catch (e) {
-        next(e);
+        next(new AuthorizationError());
     }
 }
 

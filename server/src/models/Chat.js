@@ -1,25 +1,12 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const Schema = mongoose.Schema;
+const {messageSchema} =require('../models/Message.js');
 
 const userRef = {
   type: Schema.Types.ObjectId,
   ref: 'User',
 };
-
-const messageSchema = new Schema({
-  authorId: {
-    type: Schema.Types.ObjectId,
-    required: true,
-  },
-  body: {
-    type: Schema.Types.String,
-    default: '',
-  },
-  files: [Schema.Types.String],
-}, {
-  timestamp: true,
-});
 
 const chatSchema = new Schema({
   name: {

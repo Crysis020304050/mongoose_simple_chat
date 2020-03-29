@@ -3,3 +3,12 @@
 body {
   background-color: $main-color;
 }
+
+.container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: inherit;
+  min-width: 100vw;
+
+}

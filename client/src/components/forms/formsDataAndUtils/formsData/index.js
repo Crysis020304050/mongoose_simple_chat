@@ -36,6 +36,7 @@ export const fieldValues = [
         component: FileInput,
         fieldOptions: {
             name: 'profilePicture',
+            label: 'Profile picture',
         },
         inputProps: {
             type: 'file',
