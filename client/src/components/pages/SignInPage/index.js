@@ -1,14 +1,14 @@
-import React          from 'react';
-import { withRouter } from 'react-router';
-import SignUpForm from "../../../components/forms/SignUpForm";
+import React from 'react';
+import {withRouter} from 'react-router';
+import SignInForm from "../../../components/forms/SignInForm";
 import {connect} from "react-redux";
-import {Redirect} from 'react-router-dom'
-import './SignUpPage.module.scss';
+import {Redirect} from 'react-router-dom';
+import './SignInPage.module.scss';
 
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function SignUpPage({user, error}) {
+function SignInPage({user, error}) {
 
     if (error?.response && !toast.isActive(1)) {
         const {response: {data}} = error;
@@ -22,7 +22,7 @@ function SignUpPage({user, error}) {
 
     return (
         <>
-            {user ? <Redirect to={'/'}/> : <SignUpForm/>}
+            {user ? <Redirect to={'/'}/> : <SignInForm/>}
             {
                 error && <ToastContainer/>
             }
@@ -32,4 +32,4 @@ function SignUpPage({user, error}) {
 
 const mapStateToProps = state => state.auth;
 
-export default connect(mapStateToProps)(withRouter(SignUpPage));
+export default connect(mapStateToProps)(withRouter(SignInPage));

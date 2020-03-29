@@ -1,14 +1,15 @@
-const router = require('express').Router();
-const upload = require('./../middleware/multer.js');
-const userController = require('../controllers/user.controller.js');
+const router = require('express')();
+const authRouter = require('./auth.js');
+const {handleValidationError, handleApplicationError, handleMongoError } = require('../middlewares/errorHandler');
+const checkAuth = require('../middlewares/auth/checkAuth.js');
 
-router.post('/sign_up',
-  upload.single('profilePicture'),
-  (req, res, next) => {
+router.use(authRouter);
+router.use(checkAuth);
 
-    req.body.profilePicture = req.file.filename;
-    next();
-  },
-  userController.createUser);
+
+router.use(handleApplicationError);
+router.use(handleValidationError);
+router.use(handleMongoError);
+
 
 module.exports = router;

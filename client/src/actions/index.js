@@ -1,14 +1,8 @@
 import ACTION_TYPES from './actionTypes.js';
 
-export const createLoginRequestAction = (values) => ( {
-  type: ACTION_TYPES.LOGIN_REQUEST,
+export const createAuthRequestAction = (values) => ( {
+  type: ACTION_TYPES.AUTH_REQUEST,
   values,
-
-} );
-export const createSignUpRequestAction = (values) => ( {
-  type: ACTION_TYPES.SIGN_UP_REQUEST,
-  values,
-
 } );
 
 export const createAuthSuccessAction = (user) => ( {

@@ -6,10 +6,9 @@ const initialState = {
   isFetching: false,
 };
 
-function authReducer (state = initialState, action) {
+export default function authReducer (state = initialState, action) {
   switch (action.type) {
-    case ACTION_TYPES.SIGN_UP_REQUEST:
-    case ACTION_TYPES.LOGIN_REQUEST:
+    case ACTION_TYPES.AUTH_REQUEST:
       return {
         ...state,
         isFetching: true,
@@ -20,9 +19,13 @@ function authReducer (state = initialState, action) {
         isFetching: false,
         user: action.user,
       };
+    case ACTION_TYPES.AUTH_ERROR:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.error,
+      };
     default:
       return state;
   }
 }
-
-export default authReducer;

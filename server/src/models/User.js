@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const { PROFILE_PICTURE_PATH } = require('../constants');
 const Schema = mongoose.Schema;
+const SALT_WORK_FACTOR = 10;
 
 const userSchema = new Schema({
 
@@ -18,22 +19,29 @@ const userSchema = new Schema({
   },
   profilePicture: {
     type: Schema.Types.String,
-    get: value => `${ PROFILE_PICTURE_PATH }/${ value }`,
+    get: value => {
+      if (value) {
+        return `${ PROFILE_PICTURE_PATH }/${ value }`
+      }
+      return '';
+    },
   },
 });
 
-userSchema.pre('save', function hashPassword (next) {
-
-  if ( !this.isModified('password')) {
+userSchema.pre('save', async function save(next) {
+  if (!this.isModified('password')) return next();
+  try {
+    const salt = await bcrypt.genSalt(SALT_WORK_FACTOR);
+    this.password = await bcrypt.hash(this.password, salt);
     return next();
+  } catch (err) {
+    return next(err);
   }
-  this.password = bcrypt.hashSync(this.password, 10);
-  next();
 });
 
-userSchema.method('comparePassword', function (password) {
-  return bcrypt.compare(password, this.password, 10);
-});
+userSchema.methods.comparePassword = async function comparePassword(data) {
+  return bcrypt.compare(data, this.password);
+};
 
 userSchema.set('toObject', { getters: true });
 userSchema.set('toJSON', { getters: true });

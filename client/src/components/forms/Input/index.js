@@ -1,13 +1,18 @@
-import React from 'react';
-import styles from './Input.module.scss';
+import React      from 'react';
+import classNames from 'classnames';
+import styles     from './Input.module.scss';
 
-const Input = ({ label, input, meta, ...rest }) => {
-  return (
-    <label title={ label }>
-      <span className={ styles.label }>{ label }</span>
-      <input { ...input }/>
-    </label>
-  );
+const Input = ({ field, form, meta: {error, touched}, ...props }) => {
+    const inputClassName = classNames( styles.field, {
+        [styles.fieldInvalid]: (touched && error),
+        [styles.fieldValid]: (touched && !error),
+    } );
+    return (
+        <label className={styles.container}>
+            <input {...field} className={inputClassName} {...props}/>
+            {error && touched && <div className={styles.errorTip}>{error}</div>}
+        </label>
+    );
 };
 
 export default Input;

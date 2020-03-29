@@ -19,12 +19,6 @@ app.use(express.static(path.join(__dirname, '../uploads')));
 * http routing
 * */
 app.use('/api', router);
-/*
-* error handler
-* */
-app.use((err, req, res, next) => {
-  res.send(err);
-});
 
 /*
 * WebSocket

@@ -1,48 +1,43 @@
-import React from 'react';
-import { Formik, Form, Field } from 'formik';
-import PropTypes from 'prop-types';
-import { createSignUpRequestAction } from '../../../actions';
-import { connect } from 'react-redux';
+import React from "react";
+import {Form, withFormik} from 'formik';
+import {signUpSchema} from "../validationSchema";
+import styles from './SignUpForm.module.scss';
+import { NavLink } from 'react-router-dom';
+import {fieldValues} from '../formsDataAndUtils/formsData'
+import {renderFields} from '../formsDataAndUtils/formsUtils'
+import store from '../../../store';
+import {createAuthRequestAction} from '../../../actions';
 
-const SignUpForm = props => {
-
-  const handleSubmit = (values) => {
+const handleSubmit = values => {
     const formData = new FormData();
-    for (const prop in values) {
-      formData.append(prop, values[ prop ]);
+    for (let prop in values) {
+        formData.append(prop, values[ prop ]);
     }
-    props.signUp(formData);
-  };
-
-  return (
-    <Formik onSubmit={ handleSubmit } initialValues={ {
-      login: '',
-      password: '',
-      profilePicture: '',
-    } }>
-      {
-        ({ setFieldValue }) => (
-          <Form encType="multipart/form-data">
-            <Field type="text" name="login" placeholder="Login"/>
-            <br/>
-            <Field type="password" name="password" placeholder="Password"/>
-            <br/>
-            <input name={ 'profilePicture' } type="file" onChange={ (event) => {
-              setFieldValue('profilePicture', event.currentTarget.files[ 0 ]);
-            } }/>
-            <br/>
-            <button type={ 'submit' }>Sign Up</button>
-          </Form>
-        )
-      }
-    </Formik>
-  );
+    store.dispatch(createAuthRequestAction(formData));
 };
 
+function SignUpForm(props) {
 
-const mapStateToProps = state => ( {} );
+    return (
+        <>
+            <div className={styles.formWrapper}>
+                <h1>Sign Up</h1>
+                <h4>Please fill in this form to create an account</h4>
+                <Form className={styles.container}>
+                    {
+                        renderFields(fieldValues)
+                    }
 
-const mapDispatchToProps = dispatch => ( {
-  signUp: (data) => dispatch(createSignUpRequestAction(data)),
-} );
-export default connect(mapStateToProps, mapDispatchToProps)(SignUpForm);
+                    <div className={styles.confirmButton} onClick={props.submitForm}>Sign Up</div>
+                </Form>
+            </div>
+            <NavLink className={styles.navLink} to='./sign_in'>Already have an account? Login here</NavLink>
+        </>
+    );
+}
+
+export default withFormik({
+    mapPropsToValues: () => ({login: '', password: '', confirmPassword: '', profilePicture: ''}),
+    validationSchema: signUpSchema,
+    handleSubmit,
+})(SignUpForm);
