@@ -32,7 +32,6 @@ const chat = io.of('/chat').on('connection', function (socket) {
 
     socket.on( 'message', async ( chatId, msg, from ) => {
         try {
-            console.log(msg);
             const message = {body: msg, authorId: from};
 
             const chat = await Chat.findById(chatId);

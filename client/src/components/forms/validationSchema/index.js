@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-const FILE_SIZE = 160 * 1024;
+const FILE_SIZE = 6000 * 1024;
 const SUPPORTED_FORMATS = [
     "image/jpg",
     "image/jpeg",
