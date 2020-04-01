@@ -4,6 +4,7 @@ import { createSelectChatAction } from "../../actions";
 import classNames from 'classnames';
 
 const ListItem = ( props ) => {
+
     const {
         chatSelector,
         currentChat,
@@ -36,6 +37,6 @@ const mapDispatchToProps = ( dispatch ) => ( {
     }
 } );
 
-const mapStateToProps = state => state.chats;
+const mapStateToProps = state => state.chat;
 
 export default connect( mapStateToProps, mapDispatchToProps )( ListItem );

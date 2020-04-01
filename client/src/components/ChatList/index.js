@@ -10,11 +10,10 @@ const ChatList = ( props ) => {
 
     return (
         <div className={styles.container}>
+
             <ul>
                 {
-                    isFetching
-                        ? ( <li>LOADING...</li> )
-                        : chats.map( ( chat ) => ( <ListItem key={chat._id}
+                    !isFetching && [...chats.values()].map( ( chat ) => ( <ListItem key={chat._id}
                                                             name={chat.name}
                                                             id={chat._id}
                                                             chatItemClassName={styles.itemContainer}

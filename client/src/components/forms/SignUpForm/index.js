@@ -27,7 +27,6 @@ function SignUpForm(props) {
                     {
                         renderFields(fieldValuesForAuth)
                     }
-
                     <div className={styles.confirmButton} onClick={props.submitForm}>Sign Up</div>
                 </Form>
             </div>

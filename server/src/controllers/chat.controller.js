@@ -37,12 +37,9 @@ class ChatController {
         try {
             const {headers: {authorization: userId}, chat, user} = req;
             chat.users.push(userId);
-            user.chats.push(chat._id);
             const savedChat = await chat.save();
-            const savedUser = await user.save();
-            if (savedChat && savedUser) {
-                const chatWithOwner = await Chat.findOne(chat).populate('owner').populate('users');
-                return res.send(chatWithOwner);
+            if (savedChat && user) {
+                return res.send(savedChat);
             }
             new BadRequestError();
         } catch (e) {
@@ -52,10 +49,10 @@ class ChatController {
 
     addMessageToChat = async (req, res, next) => {
         try {
-            const {headers: {authorization: userId}, chat, body} = req;
-            chat.messages.push(new Message({...body, authorId: userId}));
+            const {headers: {authorization: userId}, chat, user, body} = req;
+            chat.messages.push({...body, authorId: userId});
             const savedChat = await chat.save();
-            if (savedChat) {
+            if (savedChat && user) {
                 return res.send(savedChat);
             }
             new BadRequestError();
@@ -67,13 +64,14 @@ class ChatController {
     findChatWithMessages = async (req, res, next) => {
         try {
             const chat = await Chat.findById(req.params.chatId).
-            populate('users', {
-                chats: 0,
-            }).populate('owner', {
-                chats: 0,
-            });
+            populate(
+                'messages.authorId', {
+                    chats: 0,
+                }
+            );
             if (chat) {
-                return req.chat = chat;
+                req.chat = chat;
+                return next();
             }
             new ResourceNotFoundError();
         } catch (e) {
@@ -83,9 +81,9 @@ class ChatController {
 
     getChatMessages = async (req, res, next) => {
         try {
-            const {chat: {messages}} = req;
+            const {chat: {messages}, user} = req;
 
-            if (messages) {
+            if (messages && user) {
                 return res.status(200).send(messages)
             }
             res.send('Chat not found or there is no message');
@@ -96,7 +94,10 @@ class ChatController {
 
     getAllChats = async (req, res, next) => {
         try {
-            const chats = await Chat.find({});
+            const chats = await Chat.find({},{
+                messages: false,
+                __v: false,
+            });
             if (chats) {
                 return res.status(200).send(chats)
             }

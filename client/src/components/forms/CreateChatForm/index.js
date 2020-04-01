@@ -5,14 +5,24 @@ import store from "../../../store";
 import {createChatCreatingRequestAction} from '../../../actions';
 import {createChatSchema} from "../validationSchema";
 import {renderFields} from '../formsDataAndUtils/formsUtils'
-import {fieldValuesForChatCreating} from '../formsDataAndUtils/formsData'
+import {fieldValuesForChatCreating} from '../formsDataAndUtils/formsData';
+import {chatSocket} from '../../../api/ws';
 
 
 const handleSubmit = values => {
     store.dispatch(createChatCreatingRequestAction(values));
+    chatSocket.emit('newChat');
 };
 
 function CreateChatForm(props) {
+
+    const { resetForm, isSubmitting} = props;
+
+    if (isSubmitting) {
+        setTimeout(() => {
+            resetForm();
+        }, 1);
+    }
 
     return (
         <>

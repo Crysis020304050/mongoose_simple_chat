@@ -8,8 +8,8 @@ export const getAllChats = () =>
 
     } );
 
-export const getChatMessages = ( { chatId } ) =>
-    http.get( `/chat/${chatId}/messages`, {
+export const getChatMessages = ( chatId ) =>
+    http.get( `/chat/${chatId}/message`, {
         headers: {
             'Content-type': 'application/json',
         }
@@ -25,5 +25,16 @@ export const createChat = async (data) => {
     } catch (e) {
         throw e;
     }
+};
 
+export const joinToChat = async ( chatId  ) => {
+    try {
+        return await http.post(`/chat/${chatId}/users`, null,{
+            headers: {
+                'Content-type': 'application/json',
+            }
+        })
+    } catch (e) {
+        throw e;
+    }
 };

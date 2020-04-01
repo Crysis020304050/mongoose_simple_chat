@@ -19,12 +19,6 @@ export const signUpUser = async (data) => authenticateUser('/sign_up', data, {
   },
 });
 
-export const signUpUserWithPicture = async (data) => authenticateUser('/sign_up_with_picture', data, {
-  headers: {
-    'Content-type': 'multipart/form-data',
-  },
-});
-
 export const loginUser = async (data) => authenticateUser('/login', data, {
   headers: {
     'Content-type': 'application/json',

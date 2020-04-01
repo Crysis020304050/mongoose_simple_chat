@@ -13,7 +13,6 @@ class UserController {
       if (createdUser) {
         const preparedUser = createdUser.toObject();
         delete preparedUser.password;
-        delete preparedUser._id;
         delete preparedUser.__v;
         return res.status(201).send(preparedUser);
       }
@@ -56,7 +55,7 @@ class UserController {
   findUserByLogin = async (req, res, next) => {
     try {
       const {body: {login}} = req;
-      const user = await User.findOne({login},{password: true});
+      const user = await User.findOne({login},{password: true, login: true, profilePicture: true});
       if (user) {
         req.user = user;
         return next();

@@ -5,7 +5,8 @@ import {connect} from "react-redux";
 import ChatList from "../../ChatList";
 import styles from './HomePage.module.scss';
 import {createLoadChatsRequestAction} from '../../../actions';
-import MessagesList from "../../MessagesList";
+import MessagesListWrapper from "../../MessagesListWrapper";
+import {chatSocket} from '../../../api/ws';
 
 function HomePage(props) {
 
@@ -13,12 +14,15 @@ function HomePage(props) {
 
     useEffect(() => {
         loadChatList();
+        chatSocket.on('new_chat', () => {
+           loadChatList();
+        });
     }, []);
 
     return (
         <div className={styles.container}>
             <ChatList chatList={chats}/>
-            <MessagesList/>
+            <MessagesListWrapper/>
         </div>
     );
 }

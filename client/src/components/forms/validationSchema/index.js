@@ -38,8 +38,28 @@ export const signInSchema = yup.object().shape({
                                                });
 
 const CHAT_NAME_PATTERN = /^\w{6,16}$/;
-const chatNamePatternMessage = 'Login should be 6 to 16 characters long, can contains letters, numbers or "- _" characters';
+const chatNamePatternMessage = 'Chat name should be 6 to 16 characters long, can contains letters, numbers or "- _" characters';
 
 export const createChatSchema = yup.object().shape({
    chatName: yup.string().required().matches(CHAT_NAME_PATTERN, chatNamePatternMessage).label('Chat name'),
+});
+
+const MESSAGE_BODY_PATTERN = /^(?!\s*$).+/;
+const messageBodyPatternMessage = 'Message cannot be empty';
+
+export const createMessageSchema = yup.object().shape({
+    messageBody: yup.string().required().matches(MESSAGE_BODY_PATTERN, messageBodyPatternMessage).label('Message body'),
+    /*picture: yup.mixed()
+        .test("fileSize", "File too large", value => {
+            if (value) {
+                return value.size <= FILE_SIZE
+            }
+            return true;
+        })
+        .test("fileFormat", "Unsupported Format", value => {
+            if (value) {
+                return SUPPORTED_FORMATS.includes(value.type)
+            }
+            return true;
+        })*/
 });

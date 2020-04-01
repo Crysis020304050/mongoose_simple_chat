@@ -17,7 +17,7 @@ const FileInput = ({ field, form, meta: {error, touched}, ...props }) => {
     };
     return (
         <label className={styles.container}>
-            <input {...field} className={inputClassName} {...props} onChange={handleImageChange} value='' title=''/>
+            <input {...field} className={inputClassName} {...props} onChange={handleImageChange} value='' title='Image'/>
             {error && touched && <div className={styles.errorTip}>{error}</div>}
         </label>
     );

@@ -39,9 +39,8 @@ export const createLoadChatMessagesRequestAction = ( value ) => ( {
   value,
 } );
 
-export const createLoadChatMessagesSuccessAction = (chatId, messages) => ( {
+export const createLoadChatMessagesSuccessAction = (messages) => ( {
   type: ACTION_TYPES.LOAD_CHAT_MESSAGES_SUCCESS,
-  chatId,
   messages,
 } );
 
@@ -63,4 +62,35 @@ export const createChatCreatingSuccessAction = (chat) => ( {
 export const createChatCreatingErrorAction = (error) => ( {
   type: ACTION_TYPES.CREATE_CHAT_ERROR,
   error,
+} );
+
+export const createJoinToChatRequestAction = (values) => ( {
+  type: ACTION_TYPES.JOIN_TO_CHAT_REQUEST,
+  values,
+} );
+
+export const createJoinToChatSuccessAction = (chat) => ( {
+  type: ACTION_TYPES.JOIN_TO_CHAT_SUCCESS,
+  chat,
+} );
+
+export const createJoinToChatErrorAction = (error) => ( {
+  type: ACTION_TYPES.JOIN_TO_CHAT_ERROR,
+  error,
+} );
+
+export const createLoadNewMessageRequestAction = (message) => ( {
+  type: ACTION_TYPES.LOAD_NEW_MESSAGE_REQUEST,
+  message,
+} );
+
+export const createAddTypingPersonAction = (_id, login) => ( {
+  type: ACTION_TYPES.ADD_TYPING_PERSON_REQUEST,
+  _id,
+  login,
+} );
+
+export const createDeleteTypingPersonAction = (person) => ( {
+  type: ACTION_TYPES.DELETE_TYPING_PERSON_REQUEST,
+  person,
 } );

@@ -20,6 +20,11 @@ chatRouter.route('/chat/:chatId/users')
 
 chatRouter.route('/chat/:chatId/message(/:messageId)?')
     .post(ChatController.findChatById,
-        ChatController.addMessageToChat);
+        UserController.fundUserById,
+        ChatController.addMessageToChat)
+    .get(ChatController.findChatWithMessages,
+        UserController.fundUserById,
+        ChatController.getChatMessages,
+        );
 
 module.exports = chatRouter;

@@ -1,5 +1,6 @@
 .container{
   min-height: inherit;
+  max-height: 100vh;
   min-width: 200px;
   border: 1px solid grey;
   background-color: white;
@@ -9,6 +10,7 @@
 
   ul {
     flex-grow: 1;
+    overflow-y: auto;
     li {
       background-color: #00C4A2;
     }

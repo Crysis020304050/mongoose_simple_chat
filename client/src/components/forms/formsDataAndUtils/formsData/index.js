@@ -36,7 +36,6 @@ export const fieldValuesForAuth = [
         component: FileInput,
         fieldOptions: {
             name: 'profilePicture',
-            label: 'Profile picture',
         },
         inputProps: {
             type: 'file',
@@ -54,6 +53,18 @@ export const fieldValuesForChatCreating =[
         },
         inputProps: {
             placeholder: 'Chat Name',
+        },
+    },
+];
+
+export const fieldValuesForMessageCreating = [
+    {
+        component: Input,
+        fieldOptions: {
+            name: 'messageBody',
+        },
+        inputProps: {
+            placeholder: 'Message',
         },
     },
 ];
