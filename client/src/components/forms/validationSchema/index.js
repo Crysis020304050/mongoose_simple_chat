@@ -48,7 +48,7 @@ const MESSAGE_BODY_PATTERN = /^(?!\s*$).+/;
 const messageBodyPatternMessage = 'Message cannot be empty';
 
 export const createMessageSchema = yup.object().shape({
-    messageBody: yup.string().required().matches(MESSAGE_BODY_PATTERN, messageBodyPatternMessage).label('Message body'),
+    messageBody: yup.string().required().max(512).matches(MESSAGE_BODY_PATTERN, messageBodyPatternMessage).label('Message body'),
     /*picture: yup.mixed()
         .test("fileSize", "File too large", value => {
             if (value) {

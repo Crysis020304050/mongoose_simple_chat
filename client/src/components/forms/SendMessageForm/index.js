@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {createMessageSchema} from "../validationSchema";
 import {Form, withFormik} from 'formik';
 import {renderFields} from '../formsDataAndUtils/formsUtils';
@@ -17,9 +17,9 @@ const handleSubmit = values => {
 
 function SendMessageForm(props) {
 
-    const {user: {_id, login}, submitForm, currentChat, resetForm, isSubmitting} = props;
+    const {user: {_id, login}, submitForm, currentChat, resetForm, isSubmitting, isValid} = props;
 
-    if (isSubmitting) {
+    if (isSubmitting && isValid) {
         setTimeout(() => {
             resetForm();
         }, 1);
@@ -48,7 +48,7 @@ function SendMessageForm(props) {
 const mapStateToProps = state => ({...state.auth, ...state.chat});
 
 export default connect(mapStateToProps)(withFormik({
-    mapPropsToValues: () => ({messageBody: '',}),
+    mapPropsToValues: () => ({messageBody: '',/* picture: ''*/}),
     validationSchema: createMessageSchema,
     handleSubmit,
 })(SendMessageForm));

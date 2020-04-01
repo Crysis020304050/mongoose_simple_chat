@@ -8,17 +8,18 @@ const Input = ({ field, form, meta: {error, touched}, onChangeFunction, onBlurFu
         [styles.fieldValid]: (touched && !error),
     } );
 
-    if (onBlurFunction) {
-        field.onBlur = onBlurFunction;
-    }
-
     return (
         <label className={styles.container}>
             <input {...field} className={inputClassName} {...props} onChange={(e) => {
                 if (onChangeFunction) {
                     onChangeFunction();
                 }
-                form.setFieldValue(field.name, e.target.value);
+                field.onChange(e);
+            }} onBlur={e => {
+                field.onBlur(e);
+                if (onBlurFunction) {
+                    onBlurFunction();
+                }
             }}/>
             {error && touched && <div className={styles.errorTip}>{error}</div>}
         </label>

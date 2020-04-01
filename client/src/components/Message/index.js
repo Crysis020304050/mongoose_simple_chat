@@ -5,10 +5,10 @@ import {connect} from "react-redux";
 
 function Message(props) {
 
-    const {body, _id, authorId, authorId: {login, profilePicture}, user} = props;
+    const {body, authorId, authorId: {login, profilePicture}, user} = props;
 
     return (
-        <li key={_id} className={classNames(styles.container, {[styles.ourMessage]: authorId._id === user._id} )}>
+        <li className={classNames(styles.container, {[styles.ourMessage]: authorId._id === user._id} )}>
             <div className={styles.authorData}>
                 <img src={profilePicture} alt='avatar' onError={(e) => {
                     e.target.src = 'https://www.barcamania.com/sites/default/files/no_avatar.jpg';

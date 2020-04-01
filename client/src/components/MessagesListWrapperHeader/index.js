@@ -1,4 +1,4 @@
-import React, {useEffect, Component} from "react";
+import React, { Component} from "react";
 import {chatSocket} from '../../api/ws';
 import {connect} from 'react-redux';
 import {createAddTypingPersonAction, createDeleteTypingPersonAction} from "../../actions";

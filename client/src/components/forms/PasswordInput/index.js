@@ -30,7 +30,7 @@ class PasswordInput extends Component {
     };
 
     render() {
-        const {field, form, meta: {error, touched}, ...props} = this.props;
+        const {field, form, meta: {error, touched}, onChangeFunction, onBlurFunction, ...props} = this.props;
         const {isHidden} = this.state;
         const inputClassName = classNames(styles.field, {
             [styles.fieldInvalid]: (touched && error),

@@ -16,9 +16,9 @@ const handleSubmit = values => {
 
 function CreateChatForm(props) {
 
-    const { resetForm, isSubmitting} = props;
+    const { resetForm, isSubmitting, isValid} = props;
 
-    if (isSubmitting) {
+    if (isSubmitting && isValid) {
         setTimeout(() => {
             resetForm();
         }, 1);

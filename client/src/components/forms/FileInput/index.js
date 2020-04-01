@@ -2,7 +2,7 @@ import React      from 'react';
 import styles     from '../Input/Input.module.scss';
 import classNames from 'classnames';
 
-const FileInput = ({ field, form, meta: {error, touched}, ...props }) => {
+const FileInput = ({ field, form, meta: {error, touched}, onChangeFunction, onBlurFunction, ...props }) => {
 
     const inputClassName = classNames( styles.field, {
         [styles.fieldInvalid]: (touched && error),

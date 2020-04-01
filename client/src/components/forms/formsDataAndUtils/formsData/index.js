@@ -67,4 +67,15 @@ export const fieldValuesForMessageCreating = [
             placeholder: 'Message',
         },
     },
+    /*{
+        component: FileInput,
+        fieldOptions: {
+            name: 'picture',
+        },
+        inputProps: {
+            type: 'file',
+            multiple : false,
+            accept:'image/!*'
+        },
+    }*/
 ];

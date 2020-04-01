@@ -6,14 +6,14 @@ import CreateChatForm from "../forms/CreateChatForm";
 
 const ChatList = ( props ) => {
 
-    const { chats, isFetching, error } = props;
+    const { chats, isFetching } = props;
 
     return (
         <div className={styles.container}>
 
             <ul>
                 {
-                    !isFetching && [...chats.values()].map( ( chat ) => ( <ListItem key={chat._id}
+                    !isFetching && chats && [...chats.values()].map( ( chat ) => ( <ListItem key={chat._id}
                                                             name={chat.name}
                                                             id={chat._id}
                                                             chatItemClassName={styles.itemContainer}

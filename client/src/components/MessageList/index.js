@@ -9,6 +9,15 @@ import 'react-toastify/dist/ReactToastify.css';
 
 class MessageList extends Component {
 
+    constructor(props) {
+        super(props);
+        this.messagesEndRef = React.createRef()
+    }
+
+    scrollToBottom = () => {
+        this.messagesEndRef.current.scrollIntoView()
+    };
+
     componentDidMount() {
         const {loadMessages, currentChat, loadNewMessage, user, chats} = this.props;
         chatSocket.emit('join', currentChat);
@@ -40,11 +49,15 @@ class MessageList extends Component {
             chatSocket.emit('join', currentChat);
             loadMessages(currentChat);
         }
+        this.scrollToBottom();
     }
 
     renderMessages = () => {
         const {chatMessages} = this.props;
-        return [...chatMessages.values()].map(message => <Message {...message}/>)
+        if (chatMessages) {
+            return [...chatMessages.values()].map(message => <Message key={message._id} {...message}/>)
+        }
+        return null;
     };
 
     render() {
@@ -54,9 +67,10 @@ class MessageList extends Component {
                 <ToastContainer/>
                 {
                     isFetching && chatMessages.size === 0
-                        ? (<li>LOADING...</li>)
+                        ? (<li key={1}>LOADING...</li>)
                         : this.renderMessages()
                 }
+                <li key={2} ref={this.messagesEndRef}/>
             </>
         );
     }
