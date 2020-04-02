@@ -8,6 +8,7 @@ import MessagesListWrapperHeader from "../MessagesListWrapperHeader";
 import {chatSocket} from "../../api/ws";
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import MIDISounds from 'midi-sounds-react';
 
 class MessagesListWrapper extends Component {
 
@@ -22,6 +23,7 @@ class MessagesListWrapper extends Component {
                         toastId: message._id
                     });
                 };
+                this.midiSounds.playChordNow(1, [40], 1.0);
                 notify();
             }
             if (chatId === currentChat) {
@@ -48,6 +50,7 @@ class MessagesListWrapper extends Component {
         return (
             <div className={styles.container}>
                 <ToastContainer/>
+                <MIDISounds ref={(ref) => (this.midiSounds = ref)}/>
                 <MessagesListWrapperHeader className={styles.chatHeader}/>
                 <ul className={styles.messagesContainer}>
                     {
