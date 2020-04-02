@@ -1,11 +1,14 @@
-import React                      from 'react';
-import { connect }                from "react-redux";
-import { createSelectChatAction } from "../../actions";
+import React, {useEffect} from 'react';
+import {connect} from "react-redux";
+import {createSelectChatAction} from "../../actions";
 import classNames from 'classnames';
+import {chatSocket} from "../../api/ws";
 
-const ListItem = ( props ) => {
+const ListItem = (props) => {
 
     const {
+        user,
+        users,
         chatSelector,
         currentChat,
         chatItemClassName,
@@ -13,9 +16,19 @@ const ListItem = ( props ) => {
         name, id
     } = props;
 
-    const handleClick = ( e ) => {
+    useEffect(() => {
+        if (users) {
+            users.forEach(u => {
+               if (u === user._id) {
+                   chatSocket.emit('join', id);
+               }
+            });
+        }
+    });
+
+    const handleClick = (e) => {
         if (currentChat !== id) {
-            chatSelector( id )
+            chatSelector(id)
         }
     };
 
@@ -31,12 +44,12 @@ const ListItem = ( props ) => {
     );
 };
 
-const mapDispatchToProps = ( dispatch ) => ( {
-    chatSelector: ( id ) => {
-        dispatch( createSelectChatAction( id ) )
+const mapDispatchToProps = (dispatch) => ({
+    chatSelector: (id) => {
+        dispatch(createSelectChatAction(id))
     }
-} );
+});
 
-const mapStateToProps = state => state.chat;
+const mapStateToProps = state => ({...state.chat, ...state.auth});
 
-export default connect( mapStateToProps, mapDispatchToProps )( ListItem );
+export default connect(mapStateToProps, mapDispatchToProps)(ListItem);
