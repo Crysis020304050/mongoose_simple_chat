@@ -17,12 +17,8 @@ const ListItem = (props) => {
     } = props;
 
     useEffect(() => {
-        if (users) {
-            users.forEach(u => {
-               if (u === user._id) {
-                   chatSocket.emit('join', id);
-               }
-            });
+        if (users && users.some(u => u === user._id)) {
+            chatSocket.emit('join', id);
         }
     });
 

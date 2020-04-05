@@ -24,6 +24,8 @@ class MessagesListWrapper extends Component {
                     });
                 };
                 this.midiSounds.playChordNow(1, [40], 1.0);
+                //const audio = new Audio('./notification.mp3');
+                //audio.play();
                 notify();
             }
             if (chatId === currentChat) {
@@ -34,15 +36,10 @@ class MessagesListWrapper extends Component {
 
     checkIfUserInChat = () => {
         const {chats, currentChat, user} = this.props;
-        let exist = false;
         if (chats && currentChat) {
-            chats.get(currentChat).users.forEach(u => {
-                if (u === user._id) {
-                    exist = true;
-                }
-            });
+            return chats.get(currentChat).users.some(u => u === user._id);
         }
-        return exist;
+        return false;
     };
 
     render() {
