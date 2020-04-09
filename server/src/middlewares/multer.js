@@ -9,7 +9,7 @@ const storage = multer.diskStorage({
         `./../../uploads/profilePicture`);
 
     if ( !fs.existsSync(fileDestination)) {
-      fs.mkdirSync(fileDestination);
+      fs.mkdirSync(fileDestination, {recursive: true});
     }
 
     cb(null, fileDestination);
