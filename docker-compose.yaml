@@ -1,0 +1,35 @@
+version: '3.7'
+services:
+  frontend_server:
+    restart: always
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    depends_on:
+      - backend-server
+    volumes:
+    - ./client:/client
+    stdin_open: true
+    ports:
+    - 3000:3000
+
+  backend-server:
+      restart: always
+      build:
+        context: ./server
+        dockerfile: Dockerfile
+      depends_on:
+        - mongodb
+      volumes:
+      - ./server:/server
+      ports:
+      - 5000:5000
+      environment:
+        WAIT_HOSTS: mongo:27017
+
+  mongodb:
+    image: mongo
+    volumes:
+      - ./mongo-volume:/data/db
+    ports:
+      - 27017:27017
