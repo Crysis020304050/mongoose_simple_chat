@@ -15,7 +15,7 @@
     "@hapi/joi": "^17.1.1",
     "bcrypt": "^4.0.1",
     "cors": "^2.8.5",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "mongodb-core": "^3.2.7",
     "mongoose": "^5.9.6",
     "multer": "^1.4.2",
